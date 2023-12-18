@@ -1,0 +1,1 @@
+{"$type":"System.Collections.Generic.List`1[[ConsoleApp.Interfaces.IContact, ContactBook]], System.Private.CoreLib","$values":[{"$type":"ConsoleApp.Models.Contact, ContactBook","Id":"8a0cf18e-5de1-4a45-be74-b1ab6b8af31b","FirstName":"Evelina","LastName":"Kruger","Email":"evelina.kruger@telia.com","PhoneNumber":"072 702 77 00","Adress":"Forellgränd 11"}]}

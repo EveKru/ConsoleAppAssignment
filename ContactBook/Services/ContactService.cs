@@ -50,9 +50,14 @@ public class ContactService : IContactService
 
     public IContact GetDetailsOfContact(string email)
     {
-        GetListOfContacts();
-        var customer = _contacts.FirstOrDefault(x => x.Email == email);
-        return customer ??= null!;
+        try
+        {
+            GetListOfContacts();
+            var contact = _contacts.FirstOrDefault(x => x.Email == email);
+            return contact ??= null!;
+        }
+        catch (Exception ex) { Debug.WriteLine(ex.Message); }
+        return null!;
     }
 
 

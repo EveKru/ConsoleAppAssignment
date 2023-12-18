@@ -74,23 +74,47 @@ internal class MenuService : IMenuService
         Console.Write("Email: ");
         contact.Email = Console.ReadLine()!;
 
+        Console.Write("Adress: ");
+        contact.Adress = Console.ReadLine()!;
+
+        Console.Write("Phone Number: ");
+        contact.PhoneNumber = Console.ReadLine()!;
+
         _contactservice.AddContact(contact);
 
     }
 
     public void ShowAllContacts()
+
     {
+        Console.Clear();
         var contacts = _contactservice.GetListOfContacts();
         foreach (var contact in contacts)
         {
-            Console.WriteLine($"{contact.FirstName} {contact.LastName} {contact.Email}");
+            Console.WriteLine($"{contact.FirstName} {contact.LastName}");
+            Console.WriteLine($"{contact.Email}");
             Console.WriteLine();
         }
-       
+        Console.ReadKey();
+
     }
 
     public void ShowContactDetails()
     {
+        Console.Clear();
+
+        Console.WriteLine("Type in the email of the contact to access more details:");
+        var email = Console.ReadLine()!;
+        var contact = _contactservice.GetDetailsOfContact(email);
+
+        Console.WriteLine();
+        Console.WriteLine("ALL CUSTOMER DETAILS:");
+        Console.WriteLine($"Name: {contact.FirstName} {contact.LastName}");
+        Console.WriteLine($"Email: {contact.Email}");
+        Console.WriteLine($"Adress: {contact.Adress}");
+        Console.WriteLine($"ID: {contact.Id}");
+
+        Console.ReadKey();
         
     }
 
