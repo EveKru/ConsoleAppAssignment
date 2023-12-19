@@ -139,14 +139,15 @@ internal class MenuService : IMenuService
         Console.WriteLine();
         var email = Console.ReadLine()!;
         var contact =  _contactservice.DeleteContact(email);
+        Console.WriteLine();
 
-        if (contact == true)
+        if (contact)
         {
             Console.WriteLine($"User with the email ( {email} ) successfully deleted.");
         }
-        if (contact == false) 
+        else
         {
-            Console.WriteLine($"Unable to delete contact with email : {email}");
+            Console.WriteLine($"Unable to delete contact with email ( {email} )");
         }
 
         Console.ReadKey();
