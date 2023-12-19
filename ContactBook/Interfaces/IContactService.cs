@@ -10,4 +10,6 @@ public interface IContactService
 
     IContact GetDetailsOfContact(string email);
 
+    bool DeleteContact(string email);
+
 }
