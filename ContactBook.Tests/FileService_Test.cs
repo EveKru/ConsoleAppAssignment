@@ -37,4 +37,36 @@ public class FileService_Test
         Assert.False(result);
 
     }
+
+    [Fact]
+    public void GetContentFromToFileShould_GetContent_ThenReturnContent()
+    {
+
+        // Arrange 
+        IFileService fileservice = new FileService();
+        string filepath = @"c:\Education\C-sharp\ConsoleAppAssignment\test.txt";
+
+        // Act 
+        string result = fileservice.GetContentFromFile(filepath);
+
+        // Assert
+        Assert.NotNull(result);
+
+    }
+
+    [Fact]
+    public void GetContentFromToFileShould_NotGetContent_ThenReturnNull()
+    {
+
+        // Arrange 
+        IFileService fileservice = new FileService();
+        string filepath = @$"c:\{Guid.NewGuid()}\test.txt";
+
+        // Act 
+        string result = fileservice.GetContentFromFile(filepath);
+
+        // Assert
+        Assert.Null(result);
+
+    }
 }
