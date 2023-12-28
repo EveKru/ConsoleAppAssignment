@@ -2,7 +2,6 @@
 using ConsoleApp.Interfaces;
 using ConsoleApp.Models;
 using ConsoleApp.Services;
-using System.ComponentModel.DataAnnotations;
 
 namespace ContactBook.Tests;
 
@@ -17,7 +16,7 @@ public class ContactService_Test
         IContactService contactservice = new ContactService();
 
         // Act 
-        var result = contactservice.AddContact(contact);
+        bool result = contactservice.AddContact(contact);
 
         // Assert
         Assert.True(result);
@@ -53,7 +52,6 @@ public class ContactService_Test
         string email = "test.test@test.com";
 
         // Act 
-
         var result = contactservice.GetDetailsOfContact(email);
 
         // Assert
@@ -71,13 +69,11 @@ public class ContactService_Test
         string email = "test.test@test.com";
 
         // Act
-
         bool result = contactservice.DeleteContact(email);
 
         // Assert
         Assert.True(result);
     }
-
 }
 
 

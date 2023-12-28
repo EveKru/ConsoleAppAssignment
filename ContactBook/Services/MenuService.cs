@@ -100,14 +100,19 @@ internal class MenuService : IMenuService
     {
         Console.Clear();
         var contacts = _contactservice.GetListOfContacts();
-        foreach (var contact in contacts)
+        if (contacts.Any())
         {
-            Console.WriteLine("--------------------------------------");
-            Console.WriteLine($"{contact.FirstName} {contact.LastName}");
-            Console.WriteLine($"{contact.Email}");
-            Console.WriteLine("--------------------------------------");
-            Console.WriteLine();
+            foreach (var contact in contacts)
+            {
+                Console.WriteLine("--------------------------------------");
+                Console.WriteLine($"{contact.FirstName} {contact.LastName}");
+                Console.WriteLine($"{contact.Email}");
+                Console.WriteLine("--------------------------------------");
+                Console.WriteLine();
+            }
         }
+       else { Console.WriteLine("There are no contacts in the list."); }
+        
         Console.ReadKey();
 
     }
