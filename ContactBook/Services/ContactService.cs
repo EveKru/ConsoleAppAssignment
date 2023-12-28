@@ -50,17 +50,35 @@ public class ContactService : IContactService
 
     public IContact GetDetailsOfContact(string email)
     {
-        GetListOfContacts();
-        var customer = _contacts.FirstOrDefault(x => x.Email == email);
-        return customer ??= null!;
+        try
+        {
+            GetListOfContacts();
+            var contact = _contacts.FirstOrDefault(x => x.Email == email);
+            return contact ??= null!;
+        }
+        catch (Exception ex) { Debug.WriteLine(ex.Message); }
+        return null!;
     }
 
+    public bool DeleteContact(string email)
+    {
+        try
+        {
+            GetListOfContacts();
+            var contact = _contacts.FirstOrDefault(x => x.Email == email);
 
-    
+            if (contact != null)
+            {
+                _contacts.Remove(contact);
 
-
-   
-
+                string json = JsonConvert.SerializeObject(_contacts, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All });
+                _fileService.SaveContentToFile(_filepath, json);
+                return true;
+            }   
+        }
+        catch (Exception ex) { Debug.WriteLine(ex.Message); }
+        return false;
+    }
 
 }
 

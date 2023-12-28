@@ -74,29 +74,89 @@ internal class MenuService : IMenuService
         Console.Write("Email: ");
         contact.Email = Console.ReadLine()!;
 
-        _contactservice.AddContact(contact);
+        Console.Write("Adress: ");
+        contact.Adress = Console.ReadLine()!;
 
+        Console.Write("Phone Number: ");
+        contact.PhoneNumber = Console.ReadLine()!;
+
+        var result = _contactservice.AddContact(contact);
+        Console.WriteLine();
+
+        if (result)
+        {
+            Console.WriteLine("Contact successfully added.");
+        }
+        else
+        { 
+            Console.WriteLine("Unable to add contact."); 
+        }
+
+        Console.ReadKey();
     }
 
     public void ShowAllContacts()
+
     {
+        Console.Clear();
         var contacts = _contactservice.GetListOfContacts();
-        foreach (var contact in contacts)
+        if (contacts.Any())
         {
-            Console.WriteLine($"{contact.FirstName} {contact.LastName} {contact.Email}");
-            Console.WriteLine();
+            foreach (var contact in contacts)
+            {
+                Console.WriteLine("--------------------------------------");
+                Console.WriteLine($"{contact.FirstName} {contact.LastName}");
+                Console.WriteLine($"{contact.Email}");
+                Console.WriteLine("--------------------------------------");
+                Console.WriteLine();
+            }
         }
-       
+       else { Console.WriteLine("There are no contacts in the list."); }
+        
+        Console.ReadKey();
+
     }
 
     public void ShowContactDetails()
     {
+        Console.Clear();
+
+        Console.WriteLine("Type in the email of the contact to access more details:");
+        var email = Console.ReadLine()!;
+        var contact = _contactservice.GetDetailsOfContact(email);
+
+        Console.WriteLine();
+        Console.WriteLine("ALL CUSTOMER DETAILS:");
+        Console.WriteLine($"Name: {contact.FirstName} {contact.LastName}");
+        Console.WriteLine($"Email: {contact.Email}");
+        Console.WriteLine($"Adress: {contact.Adress}");
+        Console.WriteLine($"ID: {contact.Id}");
+
+        Console.ReadKey();
         
     }
 
     public void ShowDeleteContact()
     {
-        
+        Console.Clear();
+
+        Console.WriteLine("Type in the email of the contact to DELETE all saved data.");
+        Console.WriteLine();
+        var email = Console.ReadLine()!;
+        var contact =  _contactservice.DeleteContact(email);
+        Console.WriteLine();
+
+        if (contact)
+        {
+            Console.WriteLine($"User with the email ( {email} ) successfully deleted.");
+        }
+        else
+        {
+            Console.WriteLine($"Unable to delete contact with email ( {email} )");
+        }
+
+        Console.ReadKey();
+
     }
 
     public void ShowExitApplication()
